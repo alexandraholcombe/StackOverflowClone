@@ -7,9 +7,9 @@ using StackOverflow.Models;
 
 namespace StackOverflow.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170425183932_AddQuestionTable")]
-    partial class AddQuestionTable
+    [DbContext(typeof(MyApplicationDbContext))]
+    [Migration("20170425215643_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

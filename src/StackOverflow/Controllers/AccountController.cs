@@ -5,18 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using StackOverflow.Models;
-using System.Threading.Tasks;
 using StackOverflow.ViewModels;
 
 namespace StackOverflow.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly ApplicationDbContext _db;
+        private readonly MyApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, MyApplicationDbContext db)
         {
             _userManager = userManager;
             _signInManager = signInManager;

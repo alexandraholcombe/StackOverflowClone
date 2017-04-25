@@ -29,10 +29,10 @@ namespace StackOverflow
         {
             services.AddMvc();
             services.AddEntityFramework()
-                .AddDbContext<ApplicationDbContext>(options =>
+                .AddDbContext<MyApplicationDbContext>(options =>
                     options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<MyApplicationDbContext>()
                 .AddDefaultTokenProviders();
         }
 

@@ -5,22 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using StackOverflow.Models;
 using Microsoft.EntityFrameworkCore;
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.AspNetCore.Authorization;
 
 namespace StackOverflow.Controllers
 {
+    [Authorize]
     public class QuestionsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        //private readonly MyApplicationDbContext _db;
+
+        //public QuestionsController(MyApplicationDbContext db)
+        //{
+        //    _db = db;
+        //}
+        private MyApplicationDbContext _db = new MyApplicationDbContext();
         public IActionResult Index()
         {
-            return View(db.Questions.ToList());
+            return View(_db.Questions.ToList());
         }
 
         public IActionResult Details(int id)
         {
-            var thisQuestion = db.Questions.FirstOrDefault(questions => questions.Id == id);
+            var thisQuestion = _db.Questions.FirstOrDefault(questions => questions.Id == id);
             return View(thisQuestion);
         }
 
@@ -32,37 +38,37 @@ namespace StackOverflow.Controllers
         [HttpPost]
         public IActionResult Create(Question question)
         {
-            db.Questions.Add(question);
-            db.SaveChanges();
+            _db.Questions.Add(question);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Edit(int id)
         {
-            var thisQuestion = db.Questions.FirstOrDefault(questions => questions.Id == id);
+            var thisQuestion = _db.Questions.FirstOrDefault(questions => questions.Id == id);
             return View(thisQuestion);
         }
 
         [HttpPost]
         public IActionResult Edit(Question question)
         {
-            db.Entry(question).State = EntityState.Modified;
-            db.SaveChanges();
+            _db.Entry(question).State = EntityState.Modified;
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public IActionResult Delete(int id)
         {
-            var thisQuestion = db.Questions.FirstOrDefault(questions => questions.Id == id);
+            var thisQuestion = _db.Questions.FirstOrDefault(questions => questions.Id == id);
             return View(thisQuestion);
         }
 
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
-            var thisQuestion = db.Questions.FirstOrDefault(questions => questions.Id == id);
-            db.Questions.Remove(thisQuestion);
-            db.SaveChanges();
+            var thisQuestion = _db.Questions.FirstOrDefault(questions => questions.Id == id);
+            _db.Questions.Remove(thisQuestion);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

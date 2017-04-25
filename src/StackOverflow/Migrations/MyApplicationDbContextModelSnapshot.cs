@@ -7,8 +7,8 @@ using StackOverflow.Models;
 
 namespace StackOverflow.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MyApplicationDbContext))]
+    partial class MyApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
